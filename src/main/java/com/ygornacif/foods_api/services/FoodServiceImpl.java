@@ -1,5 +1,9 @@
 package com.ygornacif.foods_api.services;
 
+import com.ygornacif.foods_api.entity.FoodEntity;
+import com.ygornacif.foods_api.io.FoodRequest;
+import com.ygornacif.foods_api.io.FoodResponse;
+import com.ygornacif.foods_api.repository.FoodRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectAclRequest;
 public class FoodServiceImpl implements FoodService {
 
     private final S3Client s3Client;
+    private final FoodRepository foodRepository;
 
     @Value("${aws.s3.bucket}")
     private String bucketName;
@@ -55,5 +60,34 @@ public class FoodServiceImpl implements FoodService {
         } catch (IOException | S3Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error uploading file: " + e.getMessage());
         }
+    }
+
+    @Override
+    public FoodResponse addFood(FoodRequest request, MultipartFile file) {
+       FoodEntity newFoodEntity = convertToEntity(request);
+       String imageUrl = uploadFile(file);
+       newFoodEntity.setImageUrl(imageUrl);
+       newFoodEntity = foodRepository.save(newFoodEntity);
+        return convertToResponse(newFoodEntity);
+    }
+
+    private FoodEntity convertToEntity(FoodRequest request) {
+        return FoodEntity.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .price(request.getPrice())
+                .category(request.getCategory())
+                .build();
+    }
+
+    private FoodResponse convertToResponse(FoodEntity entity) {
+        return FoodResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .category(entity.getCategory())
+                .imageUrl(entity.getImageUrl())
+                .build();
     }
 }
