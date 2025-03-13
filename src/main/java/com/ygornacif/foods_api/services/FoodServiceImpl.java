@@ -5,6 +5,7 @@ import com.ygornacif.foods_api.io.FoodRequest;
 import com.ygornacif.foods_api.io.FoodResponse;
 import com.ygornacif.foods_api.repository.FoodRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,21 @@ import java.util.UUID;
 
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.model.PutObjectAclRequest;
+
 @Service
-@AllArgsConstructor
 public class FoodServiceImpl implements FoodService {
+
 
     private final S3Client s3Client;
     private final FoodRepository foodRepository;
 
-    @Value("${aws.s3.bucket}")
+    @Value("${aws.s3.bucket.name}")
     private String bucketName;
+
+    public FoodServiceImpl(S3Client s3Client, FoodRepository foodRepository) {
+        this.s3Client = s3Client;
+        this.foodRepository = foodRepository;
+    }
 
     @Override
     public String uploadFile(MultipartFile file) {
