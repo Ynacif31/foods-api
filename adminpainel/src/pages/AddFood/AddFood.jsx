@@ -2,25 +2,35 @@ import React from 'react';
 
 const AddFood = () => {
   return (
-    <div className="container ">
-    <div className="row justify-content-center">
-      <div className="col-md-8">
-        <div className="contact-form">
-          <h2 className="mb-4">Contact Us</h2>
+    <div className="container mt-2">
+    <div className="row">
+      <div className="col-md-4">
+        <div className="card-body">
+          <h2 className="mb-4">Adcione os alimentos</h2>
           <form>
             <div className="mb-3">
-              <label for="name" className="form-label">Your Name</label>
-              <input type="text" className="form-control" id="name" required />
+              <label htmlFor="name" className="form-label">Nome</label>
+              <input type="text" className="form-control" id="name" required name='nome' />
             </div>
             <div className="mb-3">
-              <label for="email" className="form-label">Your Email</label>
-              <input type="email" className="form-control" id="email" required />
+              <label htmlFor="description" className="form-label">Descrição</label>
+              <textarea className="form-control" id="description" rows="5" required name='description'></textarea>
+            </div>            
+            <div className="mb-3">
+              <label htmlFor="category" className="form-label">Categoria</label>
+              <select className="form-select" id="category">
+              <option value="Tradicionais">Tradicionais</option>
+                <option value="Especiais">Especiais</option>
+                <option value="Integrais">Integrais</option>
+                <option value="Sem Gluten">Sem Gluten</option>
+                <option value="Sem Lactose">Sem Lactose</option>
+              </select>
             </div>
             <div className="mb-3">
-              <label for="message" className="form-label">Your Message</label>
-              <textarea className="form-control" id="message" rows="5" required></textarea>
+              <label htmlFor="price" className="form-label">Preço</label>
+              <input type="number"  name='price' className="form-control" id="price" required />
             </div>
-            <button type="submit" className="btn btn-primary">Send Message</button>
+            <button type="submit" className="btn btn-primary">Salvar</button>
           </form>
         </div>
       </div>
