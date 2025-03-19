@@ -4,8 +4,6 @@ import com.ygornacif.foods_api.entity.FoodEntity;
 import com.ygornacif.foods_api.io.FoodRequest;
 import com.ygornacif.foods_api.io.FoodResponse;
 import com.ygornacif.foods_api.repository.FoodRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.model.PutObjectAclRequest;
@@ -76,6 +76,13 @@ public class FoodServiceImpl implements FoodService {
        newFoodEntity.setImageUrl(imageUrl);
        newFoodEntity = foodRepository.save(newFoodEntity);
         return convertToResponse(newFoodEntity);
+    }
+
+    @Override
+    public List<FoodResponse> getAllFoods() {
+        return foodRepository.findAll()
+                .stream().map(this::convertToResponse)
+                .collect(Collectors.toList());
     }
 
     private FoodEntity convertToEntity(FoodRequest request) {

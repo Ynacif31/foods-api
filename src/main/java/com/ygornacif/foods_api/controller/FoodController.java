@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/foods")
 @AllArgsConstructor
@@ -32,6 +34,11 @@ public class FoodController {
         }
         FoodResponse response = foodService.addFood(request, file);
         return response;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FoodResponse>> getAllFoods() {
+        return ResponseEntity.ok(foodService.getAllFoods());
     }
 
 }
