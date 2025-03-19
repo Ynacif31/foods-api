@@ -40,5 +40,11 @@ public class FoodController {
     public ResponseEntity<List<FoodResponse>> getAllFoods() {
         return ResponseEntity.ok(foodService.getAllFoods());
     }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFood(@PathVariable String id) {
+        foodService.deleteFood(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

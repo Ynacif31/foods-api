@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import './ListFood.css';
+import { getFoodList, removeFood } from '../../services/foodService';
 
 const ListFood = () => {
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/foods');
-      if (response.status === 200) {
-        const data = await response.json(); // Convertendo a resposta para JSON
-        setList(data);
-      } else {
-        toast.error('Erro ao buscar alimentos');
+      const data = await getFoodList();
+      setList(data);
+    } catch (error) {
+      toast.error('Erro ao carregar lista de alimentos');
+    }
+  };
+
+  const handleRemoveFood = async (id) => {
+    try {
+      const success = await removeFood(id);
+      if (success) {
+        toast.success('Alimento removido com sucesso');
+        await fetchList();
       }
     } catch (error) {
-      toast.error('Erro ao buscar alimentos');
+      toast.error('Erro ao remover alimento');
     }
   };
 
@@ -46,7 +55,7 @@ const ListFood = () => {
                 <td>{item.category}</td>
                 <td>R${item.price}</td>
                 <td className='text-danger'>
-                  <i className='bi bi-x-circle-fill'></i>
+                  <i className='bi bi-x-circle-fill' onClick={() => handleRemoveFood(item.id)}></i>
                 </td>
               </tr>
             ))}

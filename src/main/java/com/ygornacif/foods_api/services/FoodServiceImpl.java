@@ -85,6 +85,22 @@ public class FoodServiceImpl implements FoodService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public FoodResponse getFoodById(String id) {
+        return null;
+    }
+
+    @Override
+    public FoodResponse updateFood(String id, FoodRequest request, MultipartFile file) {
+        return null;
+    }
+
+    @Override
+    public void deleteFood(String id) {
+        FoodResponse food = getFoodById(id);
+        foodRepository.deleteById(id);
+    }
+
     private FoodEntity convertToEntity(FoodRequest request) {
         return FoodEntity.builder()
                 .name(request.getName())

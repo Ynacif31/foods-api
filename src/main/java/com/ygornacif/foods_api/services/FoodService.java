@@ -13,4 +13,10 @@ public interface FoodService {
     FoodResponse addFood(FoodRequest request, MultipartFile file);
 
     List<FoodResponse> getAllFoods();
+
+    FoodResponse getFoodById(String id);
+
+    FoodResponse updateFood(String id, FoodRequest request, MultipartFile file);
+
+    void deleteFood(String id);
 }
