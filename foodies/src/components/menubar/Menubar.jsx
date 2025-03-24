@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'; // Importe o componente Link
 
 const Menubar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg">
       <div className="container">
         <img src={assets.naturalpani} alt="" className='mx-4' width={48} height={48} />
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

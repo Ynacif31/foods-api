@@ -1,0 +1,91 @@
+/* Estilização geral da navbar */
+.navbar {
+    background-color: #8b5e3b21 !important; /* Cor marrom */
+    padding: 12px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Mantém a navbar fixa */
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Garante que fique acima do conteúdo */
+  }
+  
+  
+  .navbar .container {
+    max-width: 1200px;
+  }
+  
+  /* Logo */
+  .navbar img {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.301));
+  }
+  
+  /* Links de navegação */
+  .navbar-nav .nav-link {
+    color: #8b5e3b !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #8b5e3b6e !important;
+  }
+  
+  /* Botões */
+  .btn {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-outline-primary {
+    color: #fff;
+    border-color: #fff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #FFD700;
+    color: #8B5E3B;
+    border-color: #FFD700;
+  }
+  
+  .btn-outline-success {
+    color: #0c0c0c;
+    border-color: #FFD700;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #FFD700;
+    color: #8B5E3B;
+  }
+  
+  /* Ícone do carrinho */
+  .position-relative img {
+    filter: brightness(20) invert(1); /* Deixa o ícone branco */
+  }
+  
+  .position-absolute.badge {
+    background-color: #FFD700; /* Dourado */
+    color: #8B5E3B;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 2px solid white;
+    padding: 5px 8px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      text-align: center;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  
+    .position-relative {
+      margin: 0 auto;
+    }
+  }
+  
