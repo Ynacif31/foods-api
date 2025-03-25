@@ -6,6 +6,7 @@ import App from './App.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { StoreContextProvider } from './context/StoreContext.jsx';
 
 // Use createRoot diretamente
 const root = createRoot(document.getElementById('root'));
@@ -13,7 +14,9 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
     <BrowserRouter>
+    <StoreContextProvider>    
       <App />
+    </StoreContextProvider>
     </BrowserRouter>
   </StrictMode>
 );

@@ -37,6 +37,7 @@ const ListFood = () => {
         <table className='table'>
           <thead>
             <tr>
+              <th>Imagem</th>
               <th>Nome</th>
               <th>Descrição</th>
               <th>Categoria</th>
