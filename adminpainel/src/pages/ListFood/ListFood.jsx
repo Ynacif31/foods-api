@@ -10,7 +10,8 @@ const ListFood = () => {
     try {
       const data = await getFoodList();
       setList(data);
-    } catch (error) {
+    // eslint-disable-next-line no-unused-vars
+    } catch {
       toast.error('Erro ao carregar lista de alimentos');
     }
   };
@@ -22,6 +23,7 @@ const ListFood = () => {
         toast.success('Alimento removido com sucesso');
         await fetchList();
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       toast.error('Erro ao remover alimento');
     }

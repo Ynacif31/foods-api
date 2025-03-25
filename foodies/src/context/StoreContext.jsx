@@ -4,29 +4,30 @@ import axios from "axios";
 export const StoreContext = createContext(null);
 
 export const StoreContextProvider = ({ children }) => {
-  const [foodList, setFoodList] = useState([]);
+    const [foodList, setFoodList] = useState([]);
 
-  const fetchFoodList = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api/foods");
-      setFoodList(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar os alimentos:", error);
-    }
-  };
-
-  useEffect(() => {
-    const loadData = async () => {
-      await fetchFoodList();
+    const fetchFoodList = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/api/foods");
+            console.log(response.data); // Adicione o log para verificar o retorno da API
+            setFoodList(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar lista de alimentos:", error);
+        }
     };
-    loadData();
-  }, []);
 
-  const contextValue = { foodList, fetchFoodList };
+    useEffect(() => {
+        fetchFoodList();
+    }, []);
 
-  return (
-    <StoreContext.Provider value={contextValue}>
-      {children}
-    </StoreContext.Provider>
-  );
+    const contextValue = {
+        foodList,
+        fetchFoodList,
+    };
+
+    return (
+        <StoreContext.Provider value={contextValue}>
+            {children}
+        </StoreContext.Provider>
+    );
 };
